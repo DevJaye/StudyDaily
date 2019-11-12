@@ -627,6 +627,10 @@ public Customer updateData(Long id) ;
 		return customer;
 	}
 ```
+**注意事项**
+
+`@ResponseBody`是将json对象转换
+
 **(4) web层**
 ```js
 	function editCustomer(id) {
