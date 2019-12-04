@@ -13,3 +13,10 @@
   - [CRM_SSM练习](doc/Java/SSM/CRM_SSM总结.md)
 
 ### [1.1.4 面试题积累](doc/Java/InterviewQuestion/面试题收集.md)
+
+## Linux
+### [linux基本操作](doc/liunx/../Linux/linux学习积累.md)
+### [vim操作](doc/Linux/vim&#32;操作.md)
+
+
+
