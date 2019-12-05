@@ -1,60 +1,103 @@
 # vim 操作
-- 正常模式
-  `a`
-- 插入模式/编辑模式
-- 命令行模式
-vim的操作指令
-<operation> <motion>
-<operation> <motion>
-"some text in qusetion marks"
-this is vim: the best editot out there.
 
-`: !ls` 将当前文件夹下的文件名列在文档内
-选择中要写入的=块内容`Ctrl+v` `GG`移动到行尾 `:`写入内容
+## vim的vimrc配置文件的使用
+- `：source $MYVIMRC` 刷新vim
+- `jkhl` 上下左右
+- `：split` 上下分屏 、：vsplit 左右分屏 Q退出
+- `~/.vim/vimrc`
+- `noremap` a b a键改b键    
+- `map a b` a键改b键
+- `syntax on` 打开高亮
+- `set number` 显示行号
+- `set wildmenu` ：命令补全
+- `set hlsearch`/搜索高亮
+- `set incsearch`一面输入一面高亮
+- `set ignorecase`忽略大小写43：35美化！
+---
+## 基本操作
+【y i c d f 】
+- esc 回到正常模式
+- 在vim中一共分为3种模式
+###  normal 正常模式
+- `d + ←→`删除光标←→字符（d +3←）、dd删除一行（其实是剪切，p粘贴）
+- `y+ ←→`复制光标←→字符 （y+3←）
+- `c` 删除并进入写入模式、w 光标向下移动一个词、cw删除一个词并进入写入模式、b光标到上一个词 、ciw词中删除一个词并进入写入模式，yi
+- `f` 找词
+- `/` 搜索、n下 N上
+### insert 插入模式
+- `a`插入之后
+- `A`行尾插入
+- `i`插入之前
+- `I`行首插入
+- `o`下行插入
+- `O`上行插入
+### visuarl 可视模式
+`：w`保存
+`：q`退出vim
+## vim 配合vscode使用
+### 插件``的使用
+### vim 骚操作
+1. 将当前文件夹下的文件名列在文档内
+`:r !ls` 
+![](img/2019-12-05-11-11-19.png)
+
+2. 选择中要写入的块内容`Ctrl+v` `GG`移动到行尾 `:`写入内容
 块命令
+
 `normal I写入的的内容`
 
 `normal 插入行首的内容`
-练习得代码
-```java
-()
+### vim需要记忆的操作
+1. 删除到指定位置`df+位置`
 
-<>
-i 写入模式、i插入之前、a插入之后、A行尾插入、I行首插入、o下行插入、O上行插入
-x 删除光标后一个字符
-d + ←→删除光标←→字符（d +3←）、dd删除一行（其实是剪切，p粘贴）
-y+ ←→复制光标←→字符 （y+3←）
-c 删除并进入写入模式、w 光标向下移动一个词、cw删除一个词并进入写入模式、b光标到上一个词 、ciw词中删除一个词并进入写入模式，yi
-f 找词
-/ 搜索、n下 N上
-【y i c d f 】
-esc 回到正常模式
-：w保存
-：q退出vim
-：source $MYVIMRC 刷新vim
-jkhl上下左右
-：split 上下分屏 、：vsplit 左右分屏 Q退出
-~/.vim/vimrc
-noremap a b a键改b键
-map a b a键改b键
-syntax on 打开高亮
-set number 显示行号
-set wildmenu ：命令补全
-set hlsearch /搜索高亮
-set incsearch 一面输入一面高亮
-set ignorecase 忽略大小写43：35美化！
+---
+
 # vscode-vim
 vscode中vim使用技巧
 
-# 模式
+ `cs"'` 替换双引为单引号
 
-在vim中一共分为3种模式
+    "Hello world!"
 
-1. normal 正常模式
+to change it to
 
-2. insert 插入模式
+    'Hello world!'
 
-3. visuarl 可视模式
+`cs'<q>` 
+
+    <q>Hello world!</q>
+
+ `cst"`
+
+    "Hello world!"
+
+`ds"`删除双引号
+
+    Hello world!
+
+`ysiw]` (`iw` is a text object).用指定的符号包裹单词
+
+`ys2aw(`使用`(`包裹2个单词
+
+    [Hello] world!
+
+Let's make that braces and add some space (use `}` instead of `{` for no
+space): `cs]{`
+
+    { Hello } world!
+
+`yssb` or `yss)`.
+
+    ({ Hello } world!)
+
+`ds{ds)`
+
+    Hello world!
+
+ `ysiw<em>`
+
+    <em>Hello</em> world!
+    ![](img/2019-12-05-11-39-49.png)
 
 ## 模式切换:
 
@@ -148,5 +191,4 @@ vsp filename
 : 10,20d
  
  复制粘贴同理
-
 
