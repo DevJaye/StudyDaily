@@ -1,5 +1,7 @@
 # vim 操作
+![1](img/vim_siwei.jpg)
 
+![2](img/vin_src.jpg)
 ## vim的vimrc配置文件的使用
 - `：source $MYVIMRC` 刷新vim
 - `jkhl` 上下左右
