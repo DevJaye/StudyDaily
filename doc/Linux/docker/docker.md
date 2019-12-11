@@ -211,18 +211,124 @@ TAG:是版本号
   - 删除全部镜像`docker rmi $(docker images -qa)`
 ### 容器命令
 ![](img/2019-12-08-14-55-51.png)
+1. 有镜像才能创建容器,这是根本前提(下载一个ubuntu)`docker pull ubuntu`
+2. 新建并启动容器
+  - `docker run [options] iamges [command]`
+  - `options` 常用
+    - `--name` 取别名
+    - `-d`后台运行容器,并返回容器ID,也即启动守护式容器
+    - `-i`以交互是模式运行容器,通常与`-t`同时使用
+    - `-t`为容器分配一个伪输入终端,通常与`-i`同时使用
+    - `-P` 随机端口映射
+    - `-p` 指定端口映射
+      - `ip:hostPort:containerPort`
+      - `ip::containerPort`
+      - `hostPort:containerPort`
+      - `containerPort`
+  `docker run -it centos /bin/bash `
+![](img/2019-12-11-16-44-12.png)
+2. 列出所有当前正在运行的容器
+
+`docker ps [options]`
+options说明
+`-a` 列出正在运行个历史运行的所有容器
+`-l` 列出最近创建的容器
+![](img/2019-12-11-16-49-16.png)
+`-n` 显示最近创建的的容器
+`-q` 只显示但是的容器对应的id
+![](img/2019-12-11-16-52-12.png)
+3. 退出容器
+   1. `exit`
+   2. `ctrl+p+q`
+4. 启动容器
+   1. `docker start 容器id或容器id名`
+5. 重启容器
+   1. docker restart 容器id或者容器名
+6. 停止容器
+   1. `docker stop 容器id或容器名`
+7. 强制停止容器
+   1. `docker kill 容器Id或容器名称`
+8. 删除已停止的容器
+   1. `docker rm 容器ID
+      1. 一次性删除多个容器
+         1. `docker rm -f ${docker ps -a -q}`
+         2. `docker ps -a -q|xargs dcoker rm`
+9. 重点
+   1.  查看容器内容日志(`docker logs -f -t --tail 容器ID`)
+       1.  `-t` 是加入时间戳
+       2.  `-f` 跟随最新日志打印
+       3.  `--tail` 数字显示最后多少条
+   2. 进入正在进行的的容器
+      1. docker exec -it 容器ID bashshell
+       ![](img/2019-12-11-18-26-52.png)
+      2. docker attach 容器id
+      ![](img/2019-12-11-18-30-27.png)
+   3. 拷贝内容
+      1. docker cp 容器ID:容器内容 拷贝到主机的位置
+      2. docker cp 主机位置 容器Id 拷贝到的容器位置
+
+
 ## 4. docker镜像
+1. 下载tomcat并跑起来
+   1. `docker run -it -p 80:8080 tomcat`
+      1. `-p` 主机端口号:docker容器端口好
+      2. `-P` 随机分配端口
+   2.  `docker run -it -P tomcat`
+    ![](img/2019-12-11-18-47-24.png)
 
 ## 5. docker容器卷
-
+![](img/2019-12-11-19-48-29.png)
+![](img/2019-12-11-19-48-43.png)
 ## 6. dockerFile解析
-
+![](img/2019-12-11-19-49-17.png)
+![](img/2019-12-11-19-49-50.png)
 ## 7. docker常用安装
-
+1. tomcat 的安装
+   1. `docker search tomcat` 查找镜像
+   2. `docker pull tomcat`云端拉取镜像
+   3. `docker images` 查看本地镜像
+   4. `docker run -it -p 8080:8080 tomcat`
+      1. `-i` 交互
+      2. `t` 终端
+      3. `-p` 指定端口
+      4. `-P` 随机分配端口
+2. mysql的安装
+   1. `docker run -p 3306:3306    --name mysql -v /zzyyuse/mysql/conf:/etc/mysql/conf.d     -v /zzyyuse/mysql/logs:/logs     -v /zzyyuse/mysql/data:/var/lib/mysql     -e MYSQL_ROOT_PASSWORD=root     -d  mysql:5.6`
+      1. `-p` 12345:3306：将主机的12345端口映射到docker容器的3306端口。
+      2. `--name mysql`：运行服务名字
+      3. `-v /zzyyuse/mysql/conf:/etc/mysql/conf.d` ：将主机/zzyyuse/mysql录下的conf/my.cnf 挂载到容器的 /etc/mysql/conf.d
+      4. `-v /zzyyuse/mysql/logs:/logs`：将主机/zzyyuse/mysql目录下的 logs 目录挂载到容器的 /logs。
+      5.  `-v /zzyyuse/mysql/data:/var/lib/mysql` ：将主机/zzyyuse/mysql目录下的data目录挂载到容器的 /var/lib/mysql 
+      6. `-e MYSQL_ROOT_PASSWORD=123456`：初始化 root 用户的密码。
+      7. `-d mysql:5.6` : 后台程序运行mysql5.6
+3. 
 ## 8. 本地镜像发布到阿里云
+## docker-compose文件
 
-
-
+## 补充学习
+### 指令记录
+1. docker pull nginx
+2.  docker images
+3.  docker run Nginx -d -p 80:80 
+4.  docker exec -it `34容器id` bash
+5.  cd /usr/share/nginx/html/
+    1.  ![](img/2019-12-11-20-12-00.png)
+6.  echo hello >index.html
+    1.  cat index.html
+    2.  ![](img/2019-12-11-20-14-37.png)
+7.  exit
+8.  docker -rm -f `容器id`
+9.  docker commit `容器id` `名字`
+    1.  ![](img/2019-12-11-20-25-36.png)
+10. docker run -d -p 90:80 `名字`
+11. vim Dockerfile
+    1.  FROM nginx
+    2.  ADD ./ usr/share/nginx/html
+12. vim index
+    1.  随便写点内容!!!
+13. docker build -t m2 `.`
+    1.  `.`为当前目录下的dockerfile文件
+     ![](img/2019-12-11-20-46-36.png)
 ---
 
 # 总结
