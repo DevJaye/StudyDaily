@@ -307,6 +307,7 @@ options说明
 
 ## 补充学习
 ### 指令记录
+![](img/2019-12-11-21-30-00.png)
 1. docker pull nginx
 2.  docker images
 3.  docker run Nginx -d -p 80:80 
@@ -329,6 +330,112 @@ options说明
 13. docker build -t m2 `.`
     1.  `.`为当前目录下的dockerfile文件
      ![](img/2019-12-11-20-46-36.png)
+14. docker run -d -p100:80 m2
+     ![](img/2019-12-11-20-55-35.png)
+15. docker save `容器名称` > 1.tar
+    ![](img/2019-12-11-21-03-04.png)
+16. ls
+    ![](img/2019-12-11-21-03-46.png)
+17. docker ps
+    1.  docker rm -f `容器id`
+    1. docker rmi `镜像名称`
+    2. ![](img/2019-12-11-21-10-45.png)
+18. docker load < 1.tar
+  ![](img/2019-12-11-21-27-23.png)
+19.  docker run -d -p 88:80 --name mysnginx -v `pwd`:/usr/share/nginx/html nginx
 ---
+## 实际项目中编排docker
+![](img/2019-12-11-21-54-05.png)
+![](img/2019-12-11-21-55-25.png)
+1. docker run -d -p 80:80 --name mynginx nginx
+2. docker exec -it mynginx bash
+   1. ifconfig
+   2. cat etc/hosts
+   3. ![](img/2019-12-11-22-28-23.png)
+3. exit
+4. docker run -dit alpine
+   1. `alpine`最小的linux系统
+5. docker exec -it 26 sh
+   1. apk add curl(安装curl)
+   2. curl 172.17.0.2
+   3. ![](img/2019-12-11-22-34-34.png)
+6. 真正生产过程的通信(--link通过解析到对应机子)
+   1. docker ps
+   2. docker rm -f $(docker ps -aq)
+   3. docker run -d -p80:80 --name myng nginx
+   4. docker run -dit --link myng:myng alpine
+   5. dcoker exec -it `容器id` sh
+   6. apk add curl
+   7. curl myng
+      1. ![](img/2019-12-11-22-42-43.png)
+   8. 原理是通过修改/etc/hosts文件实现域名解析
+      1. ![](img/2019-12-11-22-44-33.png)
+   9. exit
+7.   通过docker-compose配置
+     1.   ![](img/2019-12-11-22-47-13.png)
+     2.   安装docker-compose
+          1.   yum -y install docker-compose
+8.   ![](img/2019-12-11-22-58-56.png)
+9.  创建目录
+    1.  mkdir conf
+    2.  mkdir html
+    3.   cd html
+         1.   vim index.html
+              1.   index html 
+         2.  vim test.php
+             1.  `<?php phpinfo();`
+         3. vim mysql.php
+          ```php
+            <?php
+            $dbhost = 'localhost';  // mysql服务器主机地址
+            $dbuser = 'root';            // mysql用户名
+            $dbpass = '123456';          // mysql用户名密码
+            $conn = mysqli_connect($dbhost, $dbuser, $dbpass);
+            if(! $conn )
+            {
+            die('Could not connect: ' . mysqli_error());
+            }
+            echo '数据库连接成功！';
+            mysqli_close($conn);
+            ?>
+            ```
 
-# 总结
+            ![](img/2019-12-19-20-57-26.png) 
+        4. cd ../conf/
+        5. vim nginx.conf
+           1. ng的配置文件拷入
+           2. ![](img/2019-12-19-20-59-20.png)
+           3. ![](img/2019-12-19-20-59-46.png)
+           4. ![](img/2019-12-19-21-00-25.png)
+           
+        6. 到根目录新建docker-compose
+           1. vim docker-compose.yml
+            ```yml
+                version:"3"
+                services:
+                    nginx:
+                    image: nginx:alpine
+                    ports:
+                    - 80:80
+                    volumes:
+                    - /root/html:/usr/share/nginx/html
+                    - /root/conf/nginx.conf:/etc/nginx/nginx.config
+                php:
+                    image: devilbox/php-fpm:5.2-work-0.89
+                    volimes:
+                    - /root/html:/var/www/html
+                mysql:
+                    image:mysql:5.6
+                    environment:
+                    - MYSQL_ROOT_PASSWORD=123456
+
+            ```
+
+           2. docker-compose up -d
+           3. 测试
+              1. 访问80端口加载出index html的内容
+              2. 访问test.php返回php文件的内容
+              3. mysql.php测试数据库是否成功
+                 1. 修改mysql.php文件内的服务器地址是否正确
+## 总结
+docker的学习告一段落,希望自己后期能把此教程的环境搭建一下,把它测通,所缺少的是nginx的基础知识 
