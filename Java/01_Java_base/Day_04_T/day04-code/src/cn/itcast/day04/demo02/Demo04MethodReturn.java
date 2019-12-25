@@ -16,10 +16,7 @@ public class Demo04MethodReturn {
         int num = getSum(10, 20);
         System.out.println("返回值是：" + num);
         System.out.println("==============");
-
         printSum(100, 200);
-        System.out.println("==============");
-
         System.out.println(getSum(2, 3)); // 正确写法
         getSum(3, 5); // 正确写法，但是返回值没有用到
         System.out.println("==============");
