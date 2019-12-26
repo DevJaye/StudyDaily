@@ -1,4 +1,5 @@
 package com.dj.day04.demo09;
+
 /*
 循环结构的基本组成部分,一般可以分成四个部分
 1. **初始化语句** : 在循环开始最初执行,而且只做唯一一次
@@ -8,7 +9,11 @@ package com.dj.day04.demo09;
 * */
 public class For1 {
     public static void main(String[] args) {
-        System.out.println();
+        for (int i = 1; i < 101; i++) {
+            System.out.println();
+            System.out.println("原谅我" + i);
+        }
+        System.out.println("程序停止");
 
     }
 }

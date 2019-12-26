@@ -10,5 +10,13 @@
     <file url="file://$PROJECT_DIR$/Day_03/T-Code/Demo07Switch.java" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Day_03/T-Code/Demo08SwitchNotice.java" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Day_03/T-Code/Demo09For.java" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Day_03/T-Code/Demo10While.java" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Day_03/T-Code/Demo11DoWhile.java" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Day_03/T-Code/Demo12HundredSum.java" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Day_03/T-Code/Demo13LoopDifference.java" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Day_03/T-Code/Demo14Break.java" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Day_03/T-Code/Demo15Continue.java" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Day_03/T-Code/Demo16DeadLoop.java" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Day_03/T-Code/Demo17LoopHourAndMinute.java" charset="GB2312" />
   </component>
 </project>

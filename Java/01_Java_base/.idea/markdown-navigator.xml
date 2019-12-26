@@ -44,7 +44,7 @@
         <option name="TABLES" value="true" />
         <option name="TASKLISTITEMS" value="true" />
         <option name="TOC" value="false" />
-        <option name="WIKILINKS" value="true" />
+        <option name="WIKILINKS" value="false" />
       </PegdownExtensions>
       <ParserOptions>
         <option name="ADMONITION_EXT" value="false" />
@@ -58,7 +58,7 @@
         <option name="GFM_TABLE_RENDERING" value="true" />
         <option name="GITBOOK_URL_ENCODING" value="false" />
         <option name="GITHUB_LISTS" value="false" />
-        <option name="GITHUB_WIKI_LINKS" value="true" />
+        <option name="GITHUB_WIKI_LINKS" value="false" />
         <option name="GITLAB_EXT" value="false" />
         <option name="GITLAB_MATH_EXT" value="false" />
         <option name="GITLAB_MERMAID_EXT" value="false" />
