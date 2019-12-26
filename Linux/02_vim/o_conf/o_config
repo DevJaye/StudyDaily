@@ -1,13 +1,17 @@
 " ideavim 支持的一些选项设置：
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-set showmode
-set number
-set relativenumber
-set scrolloff=3
-set history=100000
+" set hlsearch
+" set incsearch
+" set ignorecase
+" set smartcase
+" set showmode
+" set number
+" set relativenumber
+" set scrolloff=3
+" set history=100000
+set scrolloff=5
+
+" 关闭某个快捷键
+" nnoremap <Esc> <Nop>
 
 " 一些可用的快捷键映射：
 " clear the highlighted search result
