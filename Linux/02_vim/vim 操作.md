@@ -3,6 +3,7 @@
 
 ![2](img/vin_src.jpg)
 ## vim的vimrc配置文件的使用
+- linux的配置文件的位置`~/.vim/.vimrc`文件
 - `：source $MYVIMRC` 刷新vim
 - `jkhl` 上下左右
 - `：split` 上下分屏 、：vsplit 左右分屏 Q退出
@@ -196,4 +197,41 @@ vsp filename
 : 10,20d
  
  复制粘贴同理
+
+### vim的插件安装
+
+插件列表
+
+- vim-plug(https://github.com/junegunn/vim-plug)
+
+安装步骤
+
+```sh
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+vim内部plug书写格式
+- 开始书写
+call plug#begin('~/.vim/plugged')
+
+- 中间写需要安装的插件
+
+- vim-airline
+
+```md
+
+//https://github.com/vim-airline/vim-airline
+plug(vim-airline/vim-airline)
+
+
+```
+
+
+
+- 结束书写 call plug#end()
+
+
+- 需要安装的插件
+
 
