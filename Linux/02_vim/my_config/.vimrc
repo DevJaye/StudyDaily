@@ -1,3 +1,7 @@
+" 设置粘贴混乱问题
+"
+" 区分文本类型
+filetype on
 " 设置留底五行
 set scrolloff=5
 " 开启语法高亮
@@ -42,7 +46,7 @@ nnoremap L $
 " nnoremap R :w<CR>:source \Users\dj\_ideavimrc<CR>
 " nnoremap R :w<CR>:source $VIM/.vim/.vimrc
 nnoremap R :w<CR>:source $MYVIMRC<CR>
-
+" autocmd BufwritePost $MYVIMRC source $ MYVIMRC
 " nnoremap R :source \Users\dj\_ideavimrc<CR>
 
 " ====================
@@ -103,13 +107,13 @@ inoremap ,s ~~~~ <++><Esc>F~hi
 inoremap ,i ** <++><Esc>F*i
 
 " 用了搜狗的成对出现
-inoremap ,w `<Esc>A <++><Esc>F`i
-inoremap ," "<Esc>A <++><Esc>F"i
-inoremap ,' '<Esc>A <++><Esc>F'i
+" inoremap ,w `<Esc>A <++><Esc>F`i
+" inoremap ," "<Esc>A <++><Esc>F"i
+" inoremap ,' '<Esc>A <++><Esc>F'i
 " 没用了搜狗的成对出现
-" inoremap ,w `` <++><Esc>F`i
-" inoremap ," "" <++><Esc>F"i
-" inoremap ,' "" <++><Esc>F'i
+inoremap ,w `` <++><Esc>F`i
+inoremap ," "" <++><Esc>F"i
+inoremap ,' "" <++><Esc>F'i
 
 inoremap ,c ```<Enter><++><Enter>```<Enter><Enter><++><Esc>4kA
 inoremap ,h ====<Space><++><Esc>F=hi
@@ -131,12 +135,40 @@ noremap ,m 2k^yf 2jP^<C-a>j
 noremap  ,d ^d2wj
 "  *******插件安装***********
 "  *******安装开始***********
-call plug#end()
+call plug#begin()
 "  ******+=安装开始-=**********
 Plug 'vim-airline/vim-airline'
 
-
-
+" 剪贴板和宏历史记录
+Plug '/junegunn/vim-peekaboo'
+" Auto Complete
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" ===
+" === coc
+" ===
+" ===
+" fix the most annoying bug that coc has
+silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint']
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]	=~ '\s'
+endfunction
+inoremap <silent><expr> <Tab>
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<Tab>" :
+			\ coc#refresh()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent><expr> <c-space> coc#refresh()
+" Useful commands
+nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
 
 
 "  *******插件安装结束***********
